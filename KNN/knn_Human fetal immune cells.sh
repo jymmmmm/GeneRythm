@@ -1,0 +1,1 @@
+java -jar HIPPIE_NC.jar -i=./gene_symbol_Human.txt -t=e -o=out_gene_symbol_Human.txt -s=0.5
