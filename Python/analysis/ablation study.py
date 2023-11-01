@@ -23,46 +23,45 @@ import json
 import requests
 
 gene_info = pd.read_csv("human_fetal_immune/gene_meta_3kgenes_final.csv")
-non_zero_index = np.load('non_zero_index1.npy')
 data0 = np.load('mu1.npy')
 data1 = np.load('mu_t1.npy')
 data2 = np.load('mu_f.npy')
 
 adata0 = ad.AnnData(data0)
-adata0.obs_names = gene_info.loc[non_zero_index, "gene_id"]
+adata0.obs_names = gene_info.loc[:, "gene_id"]
 adata0.var_names = ["C" + str(i) for i in range(20)]
-adata0.obs['indexa'] = range(len(non_zero_index))
+adata0.obs['indexa'] = range(len( gene_info))
 sc.pp.neighbors(adata0, n_neighbors=10, n_pcs=10)
 sc.tl.umap(adata0)
 sc.tl.leiden(adata0)
 sc.pl.umap(adata0, color=['leiden'])
 for i in range(len(gene_info)):
     gene_info.loc[i, "gene_id"] = gene_info.loc[i, "gene_id"][:15]
-adata0.obs_names = gene_info.loc[non_zero_index, "gene_id"]
+adata0.obs_names = gene_info.loc[:, "gene_id"]
 
 adata1 = ad.AnnData(data1)
-adata1.obs_names = gene_info.loc[non_zero_index, "gene_id"]
+adata1.obs_names = gene_info.loc[:, "gene_id"]
 adata1.var_names = ["C" + str(i) for i in range(20)]
-adata1.obs['indexa'] = range(len(non_zero_index))
+adata1.obs['indexa'] = range(len(gene_info))
 sc.pp.neighbors(adata1, n_neighbors=10, n_pcs=10)
 sc.tl.umap(adata1)
 sc.tl.leiden(adata1)
 sc.pl.umap(adata1, color=['leiden'])
 for i in range(len(gene_info)):
     gene_info.loc[i, "gene_id"] = gene_info.loc[i, "gene_id"][:15]
-adata1.obs_names = gene_info.loc[non_zero_index, "gene_id"]
+adata1.obs_names = gene_info.loc[:, "gene_id"]
 
 adata2 = ad.AnnData(data2)
-adata2.obs_names = gene_info.loc[non_zero_index, "gene_id"]
+adata2.obs_names = gene_info.loc[:, "gene_id"]
 adata2.var_names = ["C" + str(i) for i in range(10)]
-adata2.obs['indexa'] = range(len(non_zero_index))
+adata2.obs['indexa'] = range(len(gene_info))
 sc.pp.neighbors(adata2, n_neighbors=10, n_pcs=10)
 sc.tl.umap(adata2)
 sc.tl.leiden(adata2)
 sc.pl.umap(adata2, color=['leiden'])
 for i in range(len(gene_info)):
     gene_info.loc[i, "gene_id"] = gene_info.loc[i, "gene_id"][:15]
-adata1.obs_names = gene_info.loc[non_zero_index, "gene_id"]
+adata1.obs_names = gene_info.loc[:, "gene_id"]
 mg = mygene.MyGeneInfo()
 
 p_values0 = []

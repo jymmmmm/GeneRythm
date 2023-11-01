@@ -5,7 +5,7 @@
 @Author ： Jia Yiming
 """
 """
-生成knn，用于之后的gcn
+generate knn
 """
 
 import numpy as np
